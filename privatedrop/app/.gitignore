@@ -1,0 +1,4 @@
+.build/
+.swiftpm/
+# static libraries built from the rust repository
+lib/

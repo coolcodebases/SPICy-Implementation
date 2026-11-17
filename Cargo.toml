@@ -1,0 +1,68 @@
+# curves: pallas (E, base field F_p) and vesta (E_cyc, base field Z_q0); circuits are over F_p
+[package]
+name = "spicy"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "SPICy: Stable Private Intersection with Consistency (research implementation)"
+publish = false
+
+[dependencies]
+# arkworks 0.4
+ark-ff = { version = "0.4", default-features = false }
+ark-ec = { version = "0.4", default-features = false }
+ark-std = { version = "0.4", default-features = false }
+ark-serialize = { version = "0.4", features = ["derive"] }
+ark-poly = { version = "0.4", default-features = false }
+ark-r1cs-std = "0.4"
+ark-relations = "0.4"
+
+# pallas and vesta
+ark-pallas = "0.4"
+ark-vesta = "0.4"
+
+# random oracles and fiat-shamir
+sha2 = "0.10"
+
+# randomness
+rand = "0.8"
+rand_chacha = "0.3"
+
+# config files for examples/end_to_end
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+# wiping secrets on drop
+zeroize = "1"
+
+# multicore proving (feature parallel, on by default)
+rayon = { version = "1", optional = true }
+
+# errors and logging
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = "0.2"
+
+[features]
+default = ["parallel"]
+# multithreaded msms and loops (rayon); results are the same with or without it
+parallel = ["dep:rayon", "ark-ff/parallel", "ark-poly/parallel", "ark-ec/parallel", "ark-std/parallel"]
+# pi_open with fischlin's transform instead of fiat-shamir
+fischlin = []
+
+[dev-dependencies]
+criterion = { version = "0.5", default-features = false }
+# peak memory in the benchmark report
+libc = "0.2"
+
+[[bench]]
+name = "spicy_bench"
+harness = false
+
+# proving is slow without optimisations, so tests are built optimised
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+

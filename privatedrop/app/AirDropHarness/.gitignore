@@ -1,0 +1,13 @@
+.build/
+# populated by ../scripts/run-airdrop-harness.sh with symlinks into privatedrop-base and the spicy folder
+Sources/Relic
+Sources/OpenSSLLib
+Sources/LibArc
+Sources/CSpicy
+Sources/RelicImpl
+Sources/OpenSSLImpl
+Sources/PSI
+Sources/OpenSSL
+Sources/Libarchive
+Sources/PrivateDrop_Base
+Sources/SpicyPSI

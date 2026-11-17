@@ -1,0 +1,6 @@
+# config for: cargo run --release --example end_to_end -- --config examples/spicy.toml
+m = 8                      # sender set size
+n = 8                      # receiver set size
+# n_g = 36                 # mask length (must be at least 4(N+1))
+backend = "spartan-nizk"   # or "spartan-snark", or "transparent" (not zero-knowledge, debugging only)
+seed = 2026                # fixed seed for reproducible runs; leave out for OS randomness

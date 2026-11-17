@@ -1,0 +1,136 @@
+diff --git a/PrivateDrop App.xcodeproj/project.pbxproj b/PrivateDrop App.xcodeproj/project.pbxproj
+index 998f89f..041f85c 100644
+--- a/PrivateDrop App.xcodeproj/project.pbxproj	
++++ b/PrivateDrop App.xcodeproj/project.pbxproj	
+@@ -7,6 +7,10 @@
+ 	objects = {
+ 
+ /* Begin PBXBuildFile section */
++		A970855CBE30781F89B78B36 /* Identities in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B9B43CD3BA6F2B9CA2DA3 /* Identities */; };
++		D85A042895C5B8B63395FB7F /* spicy-test-authority.pem in Resources */ = {isa = PBXBuildFile; fileRef = 518E938DA5748CADD16C0852 /* spicy-test-authority.pem */; };
++		C3262F93E481A151508B04A9 /* Identities in Resources */ = {isa = PBXBuildFile; fileRef = 8E5B9B43CD3BA6F2B9CA2DA3 /* Identities */; };
++		9D71F24E3B7962D0C341A3C1 /* spicy-test-authority.pem in Resources */ = {isa = PBXBuildFile; fileRef = 518E938DA5748CADD16C0852 /* spicy-test-authority.pem */; };
+ 		780FDF0F24CF2710009B2C6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 780FDF0E24CF2710009B2C6E /* Assets.xcassets */; };
+ 		780FDF1224CF2710009B2C6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 780FDF1124CF2710009B2C6E /* Preview Assets.xcassets */; };
+ 		780FDF1524CF2710009B2C6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780FDF1324CF2710009B2C6E /* Main.storyboard */; };
+@@ -152,6 +156,8 @@
+ /* End PBXCopyFilesBuildPhase section */
+ 
+ /* Begin PBXFileReference section */
++		8E5B9B43CD3BA6F2B9CA2DA3 /* Identities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Identities"; path = "spicy/Resources/Identities"; sourceTree = SOURCE_ROOT; };
++		518E938DA5748CADD16C0852 /* spicy-test-authority.pem */ = {isa = PBXFileReference; lastKnownFileType = text; name = "spicy-test-authority.pem"; path = "spicy/TestAuthority/spicy-test-authority.pem"; sourceTree = SOURCE_ROOT; };
+ 		780FDF0024CF2695009B2C6E /* OpenDrop_Base.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OpenDrop_Base.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+ 		780FDF0824CF270F009B2C6E /* PrivateDrop Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrivateDrop Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+ 		780FDF0E24CF2710009B2C6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+@@ -346,6 +352,8 @@
+ 		783E72FE24CF110B00DA5518 /* Resources */ = {
+ 			isa = PBXGroup;
+ 			children = (
++				8E5B9B43CD3BA6F2B9CA2DA3 /* Identities */,
++				518E938DA5748CADD16C0852 /* spicy-test-authority.pem */,
+ 				7832E4E024E2D825009C9605 /* 1_other.plist */,
+ 				7832E4E324E2D825009C9605 /* 1_y.cms */,
+ 				7832E4DE24E2D825009C9605 /* 5_other.plist */,
+@@ -552,6 +560,8 @@
+ 			isa = PBXResourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
++				A970855CBE30781F89B78B36 /* Identities in Resources */,
++				D85A042895C5B8B63395FB7F /* spicy-test-authority.pem in Resources */,
+ 				7832E4ED24E2D825009C9605 /* 10_y.cms in Resources */,
+ 				780FDF1524CF2710009B2C6E /* Main.storyboard in Resources */,
+ 				780FDF1224CF2710009B2C6E /* Preview Assets.xcassets in Resources */,
+@@ -581,6 +591,8 @@
+ 			isa = PBXResourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
++				C3262F93E481A151508B04A9 /* Identities in Resources */,
++				9D71F24E3B7962D0C341A3C1 /* spicy-test-authority.pem in Resources */,
+ 				7832E4EC24E2D825009C9605 /* 10_y.cms in Resources */,
+ 				78DD44D824CEE6D300BEEF94 /* LaunchScreen.storyboard in Resources */,
+ 				78DD44D524CEE6D300BEEF94 /* Preview Assets.xcassets in Resources */,
+diff --git a/Shared/DataModel/Observable/AppConfiguration.swift b/Shared/DataModel/Observable/AppConfiguration.swift
+index 5da56e9..5173d09 100644
+--- a/Shared/DataModel/Observable/AppConfiguration.swift
++++ b/Shared/DataModel/Observable/AppConfiguration.swift
+@@ -56,7 +56,8 @@ class AppConfiguration: ObservableObject {
+             contactsOnly: false,
+             contacts: contacts,
+             signedY: signedY,
+-            otherPrecomputedValues: psiValues)
++            otherPrecomputedValues: psiValues,
++            spicyPSI: AppConfiguration.spicySettings(identifiers: contacts))
+ 
+         self.privateDropConfig = config
+         //        }
+@@ -93,6 +94,8 @@ class AppConfiguration: ObservableObject {
+             fatalError("Y Values missing")
+         }
+ 
++        // own identifiers, without the random test contacts added below.
++        let identifiers = contacts
+         if let noOfContacts = numberOfContacts, contacts.count < noOfContacts {
+             contacts += AppConfiguration.generateRandomTestSet(of: noOfContacts - contacts.count)
+         }
+@@ -117,7 +120,8 @@ class AppConfiguration: ObservableObject {
+             contacts: contacts,
+             signedY: signedY,
+             otherPrecomputedValues: precomputedVals,
+-            supportsPrivateDrop: mode == .psi ? true : false
++            supportsPrivateDrop: mode == .psi ? true : false,
++            spicyPSI: AppConfiguration.spicySettings(identifiers: identifiers)
+         )
+ 
+         self.privateDropConfig = newConf
+@@ -125,6 +129,51 @@ class AppConfiguration: ObservableObject {
+         return newConf
+     }
+ 
++    // psi backend, spicy or legacy.
++    // read from the PrivateDropPSIBackend user default, spicy if unset.
++    static var psiBackend: String {
++        UserDefaults.standard.string(forKey: "PrivateDropPSIBackend") ?? "spicy"
++    }
++
++    // spicy role mapping, identifiersAsSender or identifiersAsReceiver.
++    // read from the PrivateDropSpicyRoleMapping user default, identifiersAsSender if unset.
++    static var spicyRoleMapping: SpicyRoleMapping {
++        UserDefaults.standard.string(forKey: "PrivateDropSpicyRoleMapping")
++            .flatMap(SpicyRoleMapping.init(rawValue:)) ?? .identifiersAsSender
++    }
++
++    // spicy consistency level, cic or wic.
++    // read from the PrivateDropSpicyLevel user default, cic if unset.
++    static var spicyLevel: SpicyLevel {
++        UserDefaults.standard.string(forKey: "PrivateDropSpicyLevel")
++            .flatMap(SpicyLevel.init(rawValue:)) ?? .cic
++    }
++
++    // spicy settings from the bundled test identity for these identifiers.
++    // returns nil when the original psi is selected.
++    static func spicySettings(identifiers: [String]) -> SpicyPSISettings? {
++        guard psiBackend == "spicy" else { return nil }
++        let mapping = spicyRoleMapping
++        let role = mapping == .identifiersAsSender ? "sender" : "receiver"
++        let level = spicyLevel
++        let tag = level == .wic ? "spicy_wic" : "spicy"
++        let k = identifiers.count
++        let bundle = Bundle.main
++        guard
++            let signed = bundle.url(
++                forResource: "\(k)_\(tag)_\(role)", withExtension: "cms", subdirectory: "Identities"),
++            let secret = bundle.url(
++                forResource: "\(k)_\(tag)_\(role)_secret", withExtension: "bin", subdirectory: "Identities"),
++            let authority = bundle.url(forResource: "spicy-test-authority", withExtension: "pem")
++        else {
++            fatalError("No SPICy \(level.rawValue) identity for \(k) identifiers (LEVEL=\(level.rawValue) spicy/scripts/make-identity-resources.sh \(k))")
++        }
++        return SpicyPSISettings(
++            roleMapping: mapping, level: level, signedIdentity: try! Data(contentsOf: signed),
++            identitySecret: try! Data(contentsOf: secret), identifiers: identifiers,
++            authorityCertificatePEM: try! Data(contentsOf: authority))
++    }
++
+     static func randomString(length: Int) -> String {
+         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+         return String((0..<length).map { _ in letters.randomElement()! })

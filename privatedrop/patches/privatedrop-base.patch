@@ -1,0 +1,573 @@
+diff --git a/PrivateDrop Base.xcodeproj/project.pbxproj b/PrivateDrop Base.xcodeproj/project.pbxproj
+index 0a72072..0a4d01c 100644
+--- a/PrivateDrop Base.xcodeproj/project.pbxproj	
++++ b/PrivateDrop Base.xcodeproj/project.pbxproj	
+@@ -7,6 +7,11 @@
+ 	objects = {
+ 
+ /* Begin PBXBuildFile section */
++		DD3924D8E12B252A824F90BB /* Spicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F86470023A70921F6929B /* Spicy.swift */; };
++		4DD86AC5ECA93182249ED708 /* SpicyPSIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB32E653CCBA331E43B88FA /* SpicyPSIController.swift */; };
++		2289C86DE3AB7D5594122B82 /* SpicyPSISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E90368B2EB7F2DDB91DBB34 /* SpicyPSISettings.swift */; };
++		99AFC67D4257520CE79743C6 /* PKCS7SpicyAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82576BA9B534CD3E567951BB /* PKCS7SpicyAuthority.swift */; };
++		523CFC5AD173D26FC151B09F /* PSIController+Spicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0BD7A5CC216A9698DD1DD /* PSIController+Spicy.swift */; };
+ 		7808A61C254875E30029922B /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7808A580254875E20029922B /* pem2.h */; };
+ 		7808A61D254875E30029922B /* kdf.h in Headers */ = {isa = PBXBuildFile; fileRef = 7808A581254875E20029922B /* kdf.h */; };
+ 		7808A61E254875E30029922B /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = 7808A583254875E20029922B /* pem.h */; };
+@@ -343,6 +348,11 @@
+ /* End PBXCopyFilesBuildPhase section */
+ 
+ /* Begin PBXFileReference section */
++		8E9F86470023A70921F6929B /* Spicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Spicy.swift"; path = "../spicy/Sources/SpicyPSI/Spicy.swift"; sourceTree = SOURCE_ROOT; };
++		0CB32E653CCBA331E43B88FA /* SpicyPSIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SpicyPSIController.swift"; path = "../spicy/Sources/SpicyPSI/SpicyPSIController.swift"; sourceTree = SOURCE_ROOT; };
++		2E90368B2EB7F2DDB91DBB34 /* SpicyPSISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SpicyPSISettings.swift"; path = "../spicy/PrivateDropBase/SpicyPSISettings.swift"; sourceTree = SOURCE_ROOT; };
++		82576BA9B534CD3E567951BB /* PKCS7SpicyAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PKCS7SpicyAuthority.swift"; path = "../spicy/PrivateDropBase/PKCS7SpicyAuthority.swift"; sourceTree = SOURCE_ROOT; };
++		E0F0BD7A5CC216A9698DD1DD /* PSIController+Spicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PSIController+Spicy.swift"; path = "../spicy/PrivateDropBase/PSIController+Spicy.swift"; sourceTree = SOURCE_ROOT; };
+ 		7808A580254875E20029922B /* pem2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem2.h; sourceTree = "<group>"; };
+ 		7808A581254875E20029922B /* kdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdf.h; sourceTree = "<group>"; };
+ 		7808A582254875E20029922B /* fipskey.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fipskey.h.in; sourceTree = "<group>"; };
+@@ -769,6 +779,18 @@
+ /* End PBXFrameworksBuildPhase section */
+ 
+ /* Begin PBXGroup section */
++		D9C1F4DF3553B5A7797C015B /* SPICy PSI */ = {
++			isa = PBXGroup;
++			children = (
++				8E9F86470023A70921F6929B /* Spicy.swift */,
++				0CB32E653CCBA331E43B88FA /* SpicyPSIController.swift */,
++				2E90368B2EB7F2DDB91DBB34 /* SpicyPSISettings.swift */,
++				82576BA9B534CD3E567951BB /* PKCS7SpicyAuthority.swift */,
++				E0F0BD7A5CC216A9698DD1DD /* PSIController+Spicy.swift */,
++			);
++			name = "SPICy PSI";
++			sourceTree = "<group>";
++		};
+ 		7808A57F254875E20029922B /* openssl */ = {
+ 			isa = PBXGroup;
+ 			children = (
+@@ -960,6 +982,7 @@
+ 			isa = PBXGroup;
+ 			children = (
+ 				78D84DC724CB19A300994082 /* Sources */,
++				D9C1F4DF3553B5A7797C015B /* SPICy PSI */,
+ 				78D84F3224CB224600994082 /* Tests */,
+ 				78D84DC624CB197D00994082 /* Products */,
+ 				78D84DB724CB193200994082 /* PrivateDrop BaseTests.xctest */,
+@@ -1939,6 +1962,11 @@
+ 			isa = PBXSourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
++				DD3924D8E12B252A824F90BB /* Spicy.swift in Sources */,
++				4DD86AC5ECA93182249ED708 /* SpicyPSIController.swift in Sources */,
++				2289C86DE3AB7D5594122B82 /* SpicyPSISettings.swift in Sources */,
++				99AFC67D4257520CE79743C6 /* PKCS7SpicyAuthority.swift in Sources */,
++				523CFC5AD173D26FC151B09F /* PSIController+Spicy.swift in Sources */,
+ 				78D8503C24CB247900994082 /* Connection.swift in Sources */,
+ 				78D8503224CB247900994082 /* RecordData.swift in Sources */,
+ 				783E72FD24CF0D9A00DA5518 /* OpenDropConfiguration.swift in Sources */,
+@@ -2371,12 +2399,14 @@
+ 				LIBRARY_SEARCH_PATHS = (
+ 					"\"$(SRCROOT)/Sources/OpenSSL/OpenSSLLib/binary/$(PLATFORM_DISPLAY_NAME)\"",
+ 					"\"$(SRCROOT)/Sources/PSI/Relic/binary/$(PLATFORM_DISPLAY_NAME)\"",
++					"\"$(SRCROOT)/../spicy/lib/$(PLATFORM_DISPLAY_NAME)\"",
+ 				);
+ 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+ 				OTHER_LDFLAGS = (
+ 					"-lcrypto",
+ 					"-lssl",
+ 					"-lrelic_s",
++					"-lspicy_ffi",
+ 				);
+ 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OpenDrop-Base";
+ 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+@@ -2384,6 +2414,10 @@
+ 				SDKROOT = "";
+ 				SKIP_INSTALL = YES;
+ 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchos watchsimulator appletvos appletvsimulator macosx ";
++				SWIFT_INCLUDE_PATHS = (
++					"$(inherited)",
++					"\"$(SRCROOT)/../spicy/Sources/CSpicy\"",
++				);
+ 				SWIFT_VERSION = 5.0;
+ 				TVOS_DEPLOYMENT_TARGET = 13.0;
+ 				VALID_ARCHS = "i386 x86_64 arm64e arm64";
+@@ -2416,12 +2450,14 @@
+ 				LIBRARY_SEARCH_PATHS = (
+ 					"\"$(SRCROOT)/Sources/OpenSSL/OpenSSLLib/binary/$(PLATFORM_DISPLAY_NAME)\"",
+ 					"\"$(SRCROOT)/Sources/PSI/Relic/binary/$(PLATFORM_DISPLAY_NAME)\"",
++					"\"$(SRCROOT)/../spicy/lib/$(PLATFORM_DISPLAY_NAME)\"",
+ 				);
+ 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+ 				OTHER_LDFLAGS = (
+ 					"-lcrypto",
+ 					"-lssl",
+ 					"-lrelic_s",
++					"-lspicy_ffi",
+ 				);
+ 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-darmstadt.seemoo.OpenDrop-Base";
+ 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+@@ -2429,6 +2465,10 @@
+ 				SDKROOT = "";
+ 				SKIP_INSTALL = YES;
+ 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchos watchsimulator appletvos appletvsimulator macosx ";
++				SWIFT_INCLUDE_PATHS = (
++					"$(inherited)",
++					"\"$(SRCROOT)/../spicy/Sources/CSpicy\"",
++				);
+ 				SWIFT_VERSION = 5.0;
+ 				TVOS_DEPLOYMENT_TARGET = 13.0;
+ 				VALID_ARCHS = "i386 x86_64 arm64e arm64";
+diff --git a/Sources/PrivateDrop Base/Client/Peer.swift b/Sources/PrivateDrop Base/Client/Peer.swift
+index b63fe2f..a61b1b0 100644
+--- a/Sources/PrivateDrop Base/Client/Peer.swift	
++++ b/Sources/PrivateDrop Base/Client/Peer.swift	
+@@ -231,17 +231,23 @@ public class Peer {
+                 }
+ 
+                 // If request was successful. The response is
+-                do {
+-                    let data = response ?? Data()
+-                    let verifierResponse = try PropertyListDecoder().decode(
+-                        PSIVerifierResponse.self, from: data)
+-                    let finisRequestData = try psiController.startPSIClient(with: verifierResponse)
++                // spicy work runs off the event loop.
++                let work = {
++                    do {
++                        let data = response ?? Data()
++                        let (round, body) = try psiController.startPSIClientBody(data)
+ 
+-                    PrivateDrop.testDelegate?.calculatedPOK()
++                        PrivateDrop.testDelegate?.calculatedPOK()
+ 
+-                    try self.finishPSI(using: client, finishRequest: finisRequestData)
+-                } catch {
+-                    print("Error caught on PSI client: \(error)")
++                        try self.finishPSI(using: client, round: round, body: body)
++                    } catch {
++                        print("Error caught on PSI client: \(error)")
++                    }
++                }
++                if psiController.usesSpicy {
++                    DispatchQueue.global(qos: .userInitiated).async(execute: work)
++                } else {
++                    work()
+                 }
+ 
+             })
+@@ -251,15 +257,15 @@ public class Peer {
+     /// - Parameters:
+     ///   - tlsHandler: A class that implements `TLSHandler` protocol can therefore, verify the TLS ertificates of the peer
+     ///   - psiController: The `PSIClientController` used to run the client-side PSI
+-    ///   - finishRequest: The request body content that should be sent to the server. Generated in `startPSI(...)`
+-    func finishPSI(using client: Client, finishRequest: PSIFinisRequest) throws {
++    ///   - round: The client state of the first PSI round. Generated in `startPSI(...)`
++    ///   - body: The request body content that should be sent to the server. Generated in `startPSI(...)`
++    func finishPSI(using client: Client, round: PSIClientRound, body: Data) throws {
+         guard client.psiController != nil else {
+             // PSI not available
+             throw PrivateDrop.Error.psiNotAvailable
+         }
+ 
+         assert(psiStatus == .unknown)
+-        let body = try? PropertyListEncoder().encode(finishRequest)
+ 
+         PrivateDrop.testDelegate?.sendingPSIFinish()
+ 
+@@ -268,14 +274,23 @@ public class Peer {
+             head: nil, body: body,
+             write_callback: { () in PrivateDrop.testDelegate?.actuallySendingPSIFinish() },
+             callback: { [weak self] (responseHead, response) in
+-                self?.handleFinisPSI(
+-                    client: client, finishRequest: finishRequest, responseHead: responseHead,
+-                    response: response)
++                guard let self = self else { return }
++                // spicy work runs off the event loop.
++                let work = {
++                    self.handleFinisPSI(
++                        client: client, round: round, responseHead: responseHead,
++                        response: response)
++                }
++                if client.psiController?.usesSpicy == true {
++                    DispatchQueue.global(qos: .userInitiated).async(execute: work)
++                } else {
++                    work()
++                }
+             })
+     }
+ 
+     fileprivate func handleFinisPSI(
+-        client: Client, finishRequest: PSIFinisRequest, responseHead: HTTPResponseHead,
++        client: Client, round: PSIClientRound, responseHead: HTTPResponseHead,
+         response: Data?
+     ) {
+ 
+@@ -303,19 +318,15 @@ public class Peer {
+                 throw PrivateDrop.Error.psiNotAvailable
+             }
+             let data = response ?? Data()
+-            let finishResponse = try PropertyListDecoder().decode(
+-                PSIFinishResponse.self, from: data)
+-
+-            let matchingContact = try psiController.finishPSIClient(
+-                with: finishResponse.proverResponse)
+-            self.psiStatus = .contact(matchingContact)
++            let result = try psiController.finishPSIClientBody(round: round, body: data)
++            self.psiStatus = .contact(result.matches)
+ 
+             PrivateDrop.testDelegate?.PSICompleted(
+-                peerContacts: finishResponse.proverResponse.u.count,
+-                peerIds: finishRequest.prover.z.count)
++                peerContacts: result.peerContacts,
++                peerIds: round.sentValues)
+ 
+             // Check Receiver Record Data
+-            if let recordData = finishResponse.ReceiverRecordData,
++            if let recordData = result.recordData,
+                 recordData.isEmpty == false,
+                 let contactsChecker = self.contactsChecker
+             {
+@@ -336,6 +347,12 @@ public class Peer {
+                 switch psiError {
+                 case .noContactMatch:
+                     self.psiStatus = .nonContact
++                case .verificationFailed, .malformedMessage:
++                    // the peer's messages did not decode or verify.
++                    self.psiStatus = .unknown
++                    Log.error(
++                        system: .client, message: "PSI verification failed: %@",
++                        String(describing: psiError))
+                 default:
+                     self.psiStatus = .unknown
+                     assert(false, "Should not reach this state PSI not initialized properly")
+diff --git a/Sources/PrivateDrop Base/OpenDropConfiguration.swift b/Sources/PrivateDrop Base/OpenDropConfiguration.swift
+index eb01c6b..621626a 100644
+--- a/Sources/PrivateDrop Base/OpenDropConfiguration.swift	
++++ b/Sources/PrivateDrop Base/OpenDropConfiguration.swift	
+@@ -59,6 +59,9 @@ extension PrivateDrop {
+             /// Other precomputed values. Not signed, but encoded as a property list
+             public let otherPrecomputedValues: PrivatePSIValues?
+ 
++            // if set, psi runs with spicy instead of the original psi.
++            public let spicy: SpicyPSISettings?
++
+             /// Initialize the contacts for usage with the PSI protocol
+             ///
+             /// The first values are static and precomputed.
+@@ -73,14 +76,16 @@ extension PrivateDrop {
+             /// - Throws: Errors if the verification of the pre-computed values fails
+             init(
+                 recordData: Data?, contactsOnly: Bool, contacts: [String],
+-                signedY: Data?, otherPrecomputedValues: Data?
++                signedY: Data?, otherPrecomputedValues: Data?, spicy: SpicyPSISettings? = nil
+             ) throws {
+ 
+                 self.recordData = recordData
+                 self.contactsOnly = contactsOnly
+                 self.contacts = contacts
++                self.spicy = spicy
+ 
+-                if let signedY = signedY,
++                if spicy == nil,
++                    let signedY = signedY,
+                     let otherPrecomputedValues = otherPrecomputedValues
+                 {
+                     PSI.initialize(config: .init(useECPointCompression: true))
+@@ -141,9 +146,10 @@ extension PrivateDrop {
+             modelName: String? = nil,
+             contactsOnly: Bool = false,
+             contacts: [String] = [],
+-            signedY: Data,
+-            otherPrecomputedValues: Data,
+-            supportsPrivateDrop: Bool = false
++            signedY: Data? = nil,
++            otherPrecomputedValues: Data? = nil,
++            supportsPrivateDrop: Bool = false,
++            spicyPSI: SpicyPSISettings? = nil
+         ) throws {
+ 
+             self.general = General(
+@@ -159,7 +165,8 @@ extension PrivateDrop {
+                 contactsOnly: contactsOnly,
+                 contacts: contacts,
+                 signedY: signedY,
+-                otherPrecomputedValues: otherPrecomputedValues)
++                otherPrecomputedValues: otherPrecomputedValues,
++                spicy: spicyPSI)
+         }
+     }
+ }
+diff --git a/Sources/PrivateDrop Base/PSIController.swift b/Sources/PrivateDrop Base/PSIController.swift
+index 48942b9..4bba7c0 100644
+--- a/Sources/PrivateDrop Base/PSIController.swift	
++++ b/Sources/PrivateDrop Base/PSIController.swift	
+@@ -9,16 +9,28 @@ import Foundation
+ import OpenSSL
+ import PSI
+ 
++#if canImport(SpicyPSI)
++    import SpicyPSI
++#endif
++
+ // swiftlint:disable force_try
+ class PSIController {
+ 
+     enum Error: Swift.Error {
+         case stateError
+         case noContactMatch
++        // the peer's psi messages did not verify.
++        case verificationFailed
++        // the peer's psi message could not be decoded.
++        case malformedMessage
+     }
+ 
+-    var verifier: Verifier
+-    var prover: Prover
++    // original psi state, nil when spicy is used.
++    var verifier: Verifier!
++    var prover: Prover!
++
++    // spicy state, nil when the original psi is used.
++    let spicy: SpicyPSIController?
+ 
+     var config: PrivateDrop.Configuration.Contacts
+     var isContactOffPeer = false
+@@ -26,18 +38,43 @@ class PSIController {
+     var verifyPKCS7Chain = true
+ 
+     var valuesCached: Bool {
+-        self.prover.cachedU != nil
++        if let spicy = spicy { return spicy.isAddressBookPrepared }
++        return self.prover.cachedU != nil
+     }
+ 
+-    var signedY: Data
++    var signedY: Data!
+ 
+     init?(contactsConfig: PrivateDrop.Configuration.Contacts) {
++        self.config = contactsConfig
++
++        if let settings = contactsConfig.spicy {
++            do {
++                let controller = try SpicyPSIController(
++                    roleMapping: settings.roleMapping,
++                    level: settings.level,
++                    identity: SpicySignedIdentity(
++                        signedRegistration: settings.signedIdentity, secret: settings.identitySecret),
++                    identifiers: settings.identifiers,
++                    contacts: contactsConfig.contacts,
++                    authority: PKCS7SpicyAuthority(certificatePEM: settings.authorityCertificatePEM),
++                    policy: Spicy.Policy(maxPeerM: settings.maxPeerM, maxPeerNG: settings.maxPeerNG),
++                    deviceID: Data(settings.deviceID.utf8))
++                controller.metricsHandler = { PrivateDrop.testDelegate?.spicyMetrics($0) }
++                self.spicy = controller
++            } catch {
++                Log.error(
++                    system: .client, message: "SPICy PSI unavailable: %@", String(describing: error))
++                return nil
++            }
++            return
++        }
++        self.spicy = nil
++
+         guard let yValues = contactsConfig.yValues,
+             let signedY = contactsConfig.signedY,
+             let otherValues = contactsConfig.otherPrecomputedValues
+         else { return nil }
+ 
+-        self.config = contactsConfig
+         PSI.initialize(config: .init(useECPointCompression: true))
+         self.prover = try! Prover(contacts: contactsConfig.contacts)
+ 
+@@ -100,7 +137,7 @@ class PSIController {
+ 
+     func generateProverResponse(signedYValues: Data) throws -> PSIProverResponse {
+         // Generate prover values
+-        let prover = self.prover
++        let prover: Prover = self.prover
+ 
+         // Verify the signed y values
+         let yValueData = try PKCS7Verifier(pkcs7: signedYValues).verify(
+diff --git a/Sources/PrivateDrop Base/PerformanceTests/PrivateDropTestDelegate.swift b/Sources/PrivateDrop Base/PerformanceTests/PrivateDropTestDelegate.swift
+index d7a85ae..d7eb910 100644
+--- a/Sources/PrivateDrop Base/PerformanceTests/PrivateDropTestDelegate.swift	
++++ b/Sources/PrivateDrop Base/PerformanceTests/PrivateDropTestDelegate.swift	
+@@ -8,6 +8,10 @@
+ 
+ import Foundation
+ 
++#if canImport(SpicyPSI)
++    import SpicyPSI
++#endif
++
+ public protocol PrivateDropTestDelegate: AnyObject {
+ 
+     // PSI
+@@ -33,6 +37,9 @@ public protocol PrivateDropTestDelegate: AnyObject {
+ 
+     func PSICompleted(peerContacts: Int, peerIds: Int)
+ 
++    // per-step measurements of the spicy backend.
++    func spicyMetrics(_ metrics: SpicyPSIMetrics)
++
+     func authenticationFinished()
+ 
+     func precomputeUDuration(time: TimeInterval)
+@@ -86,3 +93,8 @@ public protocol PrivateDropTestDelegate: AnyObject {
+     func fileReceived(size: Int)
+ 
+ }
++
++extension PrivateDropTestDelegate {
++    // ignores spicy measurements by default.
++    public func spicyMetrics(_ metrics: SpicyPSIMetrics) {}
++}
+diff --git a/Sources/PrivateDrop Base/PrivateDrop.swift b/Sources/PrivateDrop Base/PrivateDrop.swift
+index ab4c46c..a609cee 100644
+--- a/Sources/PrivateDrop Base/PrivateDrop.swift	
++++ b/Sources/PrivateDrop Base/PrivateDrop.swift	
+@@ -112,7 +112,14 @@ public class PrivateDrop {
+             var durationU: TimeInterval?
+             if self.configuration.general.supportsPrivateDrop {
+                 let date = Date()
+-                _ = self.psiController.prover.generateU()
++                // precomputes the u values or the spicy address-book registration.
++                do {
++                    try self.psiController.precompute()
++                } catch {
++                    Log.error(
++                        system: .client, message: "PSI precomputation failed: %@",
++                        String(describing: error))
++                }
+                 durationU = -date.timeIntervalSinceNow
+             }
+ 
+diff --git a/Sources/PrivateDrop Base/Server/ServerRoutes.swift b/Sources/PrivateDrop Base/Server/ServerRoutes.swift
+index b3f4b6a..66482f9 100644
+--- a/Sources/PrivateDrop Base/Server/ServerRoutes.swift	
++++ b/Sources/PrivateDrop Base/Server/ServerRoutes.swift	
+@@ -278,17 +278,21 @@ extension Server {
+             return
+         }
+ 
+-        do {
+-            PrivateDrop.testDelegate?.psiStartReceived()
+-            let response = try psiController.startPSIServer()
+-            let respData = try PropertyListEncoder().encode(response)
+-            let headers = HTTPHeaders(self.headers(for: respData.count))
+-            server.sendResponse(
+-                with: request.context, status: .ok, headers: headers, body: respData)
+-        } catch {
+-            server.sendResponse(with: request.context, status: .internalServerError)
++        PrivateDrop.testDelegate?.psiStartReceived()
++        // spicy work runs off the event loop and replies are written on it.
++        psiController.perform(on: request.context.eventLoop) { reply in
++            do {
++                let respData = try psiController.startPSIServerBody()
++                let headers = HTTPHeaders(self.headers(for: respData.count))
++                reply {
++                    server.sendResponse(
++                        with: request.context, status: .ok, headers: headers, body: respData)
++                }
++            } catch {
++                reply { server.sendResponse(with: request.context, status: .internalServerError) }
++            }
++            reply { PrivateDrop.testDelegate?.psiStartSentResponseSent() }
+         }
+-        PrivateDrop.testDelegate?.psiStartSentResponseSent()
+     }
+ 
+     /// Finishes PSI by performing the set intersection with the client contacts and responding to the client with the second round in which the server behaves as a prover.
+@@ -306,54 +310,54 @@ extension Server {
+             server.sendResponse(with: request.context, status: .notFound)
+             return
+         }
+-        guard let buf = request.bodyData,
+-            let finishRequest = try? PropertyListDecoder().decode(PSIFinisRequest.self, from: buf)
+-        else {
++        guard let buf = request.bodyData else {
+             server.sendResponse(with: request.context, status: .badRequest)
+             return
+         }
+ 
+-        do {
+-            let proverResponse = try psiController.finishPSIServer(with: finishRequest)
+-            let finishResponse = PSIFinishResponse(
+-                proverResponse: proverResponse, ReceiverRecordData: self.config.contacts.recordData)
+-
+-            PrivateDrop.testDelegate?.PSICompleted(
+-                peerContacts: finishRequest.prover.u.count, peerIds: proverResponse.z.count)
++        // spicy work runs off the event loop and replies are written on it.
++        psiController.perform(on: request.context.eventLoop) { reply in
++            do {
++                let result = try psiController.finishPSIServerBody(
++                    buf, recordData: self.config.contacts.recordData)
+ 
+-            let respData = try PropertyListEncoder().encode(finishResponse)
+-            let headers = HTTPHeaders(self.headers(for: respData.count))
+-            server.sendResponse(
+-                with: request.context, status: .ok, headers: headers, body: respData)
++                PrivateDrop.testDelegate?.PSICompleted(
++                    peerContacts: result.peerContacts, peerIds: result.peerIds)
+ 
+-        } catch {
+-            // Handle thrown errors
+-
+-            if let verifierError = error as? Verifier.Error {
+-                switch verifierError {
+-                case .verificationFailed:
+-                    server.sendResponse(with: request.context, status: .unauthorized)
+-                case .notInitialized:
+-                    server.sendResponse(with: request.context, status: .internalServerError)
++                let headers = HTTPHeaders(self.headers(for: result.body.count))
++                reply {
++                    server.sendResponse(
++                        with: request.context, status: .ok, headers: headers, body: result.body)
+                 }
+-
+-                return
+-            }
+-
+-            if let psiError = error as? PSIController.Error {
+-                switch psiError {
+-                case .noContactMatch:
+-                    server.sendResponse(with: request.context, status: .unauthorized)
+-                case .stateError:
+-                    server.sendResponse(with: request.context, status: .internalServerError)
++            } catch {
++                // Handle thrown errors
++                let status: HTTPResponseStatus?
++                if let verifierError = error as? Verifier.Error {
++                    switch verifierError {
++                    case .verificationFailed: status = .unauthorized
++                    case .notInitialized: status = .internalServerError
++                    }
++                } else if let psiError = error as? PSIController.Error {
++                    switch psiError {
++                    case .noContactMatch, .verificationFailed: status = .unauthorized
++                    case .malformedMessage: status = .badRequest
++                    case .stateError: status = .internalServerError
++                    }
++                } else if error is DecodingError {
++                    status = .badRequest
++                } else {
++                    status = nil
+                 }
+-                return
++                if let status = status {
++                    reply { server.sendResponse(with: request.context, status: status) }
++                    return
++                }
++                reply { server.sendResponse(with: request.context, status: .internalServerError) }
++            }
++            reply {
++                PrivateDrop.testDelegate?.psiFinishResponseSent()
++                PrivateDrop.testDelegate?.authenticationFinished()
+             }
+-
+-            server.sendResponse(with: request.context, status: .internalServerError)
+-
+         }
+-        PrivateDrop.testDelegate?.psiFinishResponseSent()
+-        PrivateDrop.testDelegate?.authenticationFinished()
+     }
+ }

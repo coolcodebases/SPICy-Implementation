@@ -1,0 +1,6 @@
+module CSpicy [system] {
+    header "include/spicy_ffi.h"
+    link "spicy_ffi"
+    link framework "Security"
+    export *
+}

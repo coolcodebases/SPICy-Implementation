@@ -1,0 +1,42 @@
+# spicy with weak input consistency (wic): no circuits, the sender publishes hash leaves
+# the receiver side (pk_R, elligator squared over pallas) is shared with the main crate
+[package]
+name = "spicy-ws"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "SPICy with weak Sender input consistency (WIC), research implementation"
+publish = false
+
+[lib]
+name = "spicy_ws"
+
+[dependencies]
+ark-ff = { version = "0.4", default-features = false }
+ark-ec = { version = "0.4", default-features = false }
+ark-std = { version = "0.4", default-features = false }
+ark-serialize = { version = "0.4", features = ["derive"] }
+ark-poly = { version = "0.4", default-features = false }
+ark-pallas = "0.4"
+# only for the G_cyc type alias in types.rs
+ark-vesta = "0.4"
+sha2 = "0.10"
+rand = "0.8"
+rand_chacha = "0.3"
+zeroize = "1"
+thiserror = "1"
+rayon = { version = "1", optional = true }
+
+[features]
+default = ["parallel"]
+parallel = ["dep:rayon", "ark-ff/parallel", "ark-poly/parallel", "ark-ec/parallel", "ark-std/parallel"]
+
+[dev-dependencies]
+libc = "0.2"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
